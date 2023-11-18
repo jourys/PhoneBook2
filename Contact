@@ -1,0 +1,30 @@
+public class Contact {
+
+    public String contactsName;
+    public String phoneNumber;
+    public String emailAddress;
+    public String Address;
+    public String birthday;
+    public String notes;
+
+    public Contact() {
+        contactsName = "";
+        phoneNumber = "";
+        emailAddress = "";
+        Address = "";
+        birthday = "";
+        notes = "";
+    }
+
+    public Contact(String contactsName, String phoneNumber, String emailAddress, String Address, String birthday, String notes) {
+        this.contactsName = contactsName;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+        this.Address = Address;
+        this.birthday = birthday;
+        this.notes = notes;
+
+    }
+     
+}
+
