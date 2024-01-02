@@ -1,0 +1,239 @@
+public class linkedlist<T> {
+
+    private node<T> head;
+    private node<T> current;
+
+    
+    public linkedlist() {
+        
+head = current = null;
+    }
+
+    public linkedlist(node<T> h) 
+    {
+        head = current = h;
+
+    }
+
+    public Contact searchByName(String name) 
+    {
+        if (head == null) {
+            return null;
+        }
+
+        current = head;
+
+        while (current != null) {
+
+            if (((Contact) current.getData()).getContactName().equals(name)) {
+                return (Contact) current.getData();
+            }
+            current = current.next;
+        }
+
+        return null;
+    }
+
+    public linkedlist<Contact> SearchByEmail(String email) {
+        linkedlist<Contact> list = new linkedlist<Contact>();
+
+        if (head == null) {
+            return null;
+        } else {
+            current = head;
+        }
+
+        while (current != null) {
+            if (((Contact) current.getData()).getEmailAddress().equals(email)) {
+                list.insert((Contact) current.getData());
+            }
+            current = current.next;
+        }
+
+        return list;
+    }
+
+    public linkedlist<Contact> SearchByPhoneNumber(String num) {
+        linkedlist<Contact> list = new linkedlist<Contact>();
+
+        if (head == null) {
+            return null;
+        } else {
+            current = head;
+        }
+
+        while (current != null) {
+            if (((Contact) current.getData()).getPhoneNumber().equals(num)) {
+                list.insert((Contact) current.getData());
+            }
+            current = current.next;
+
+        }
+
+        return list;
+    }
+
+    public linkedlist<Contact> SearchByAddress(String add) {
+        linkedlist<Contact> list = new linkedlist<Contact>();
+
+        if (head == null) {
+            return null;
+        } else {
+            current = head;
+        }
+
+        while (current != null) {
+            if (((Contact) current.getData()).getAddress().equals(add)) {
+                list.insert((Contact) current.getData());
+            }
+            current = current.next;
+
+        }
+
+        return list;
+    }
+
+    public linkedlist<Contact> SearchByBirthday(String birth) {
+        linkedlist<Contact> list = new linkedlist<Contact>();
+        if (head == null) {
+            return null;
+        } else {
+            current = head;
+
+            while (current != null) {
+                if (((Contact) current.getData()).getBirthday().equals(birth)) {
+                    list.insert((Contact) current.getData());
+                }
+
+                current = current.next;
+            }
+
+            return list;
+        }
+    }
+
+    public void printList() {
+        current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+    public boolean isEmpty() 
+    {
+        return head == null;
+    }
+
+    public boolean last() 
+    {
+        return current.next == null;
+    }
+
+    public void findfirst() 
+    {
+        current = head;
+    }
+
+    public void findnext() 
+    {
+        current = current.next;
+    }
+
+    public T retrieve() {
+        return current.data;
+    }
+
+    public void update(T x) {
+        current.data = x;
+    }
+
+    public boolean full() {
+        return false;
+    }
+
+    public void remove() {
+        if (current == head) {
+            head = head.next;
+        } else {
+            node<T> extranode = head;
+
+            while (extranode.next != current) {
+                extranode = extranode.next;
+            }
+
+            extranode.next = current.next;
+        }
+        if (current.next == null) {
+            current = head;
+        } else {
+            current = current.next;
+        }
+    }
+
+    public void insert(T d) {
+        node<T> p = new node<T>(d);
+        if (head == null) {
+            head = p;
+            current = p;
+        } else {
+            p.next = current.next;
+            current.next = p;
+            current = p;
+        }
+    }
+
+    public void addSortedContact(T d) {
+        node<T> newContact = new node<T>(d);
+        //case1 if empty
+        if (head == null) {
+            head = newContact;
+            current = newContact;
+        } //case2 if smaller than first
+        else {
+            if (((Contact) d).CompareTo((Contact) head.data) < 0) {
+                newContact.next = head;
+                head = newContact;
+                return;
+
+            } else {
+                node<T> temp = head;
+                while (temp.next != null && (((Contact) d).CompareTo((Contact) temp.data) >= 0)) {
+                    temp = temp.next;
+                }
+                newContact.next = temp.next;
+                temp.next = newContact;
+
+            }
+        }
+    }
+
+    public void addSortedEvent(T e) 
+    {
+        node<T> newEvent = new node<T>(e);
+        //case1 if empty
+        if (head == null) {
+            head = newEvent;
+            current = newEvent;
+        } 
+        //case2 if smaller than first
+        else { 
+            if (((Event) e).CompareTo((Event) head.data) < 0) {
+                newEvent.next = head;
+                head = newEvent;
+                return;
+
+            } else {
+                node<T> temp = head;
+                while (temp.next != null && (((Event) e).CompareTo((Event) temp.data) >= 0)) { // search for position of the new node 
+                    temp = temp.next;
+                }
+                newEvent.next = temp.next;
+                temp.next = newEvent;
+
+            }
+        }
+    }
+
+}
